@@ -1,0 +1,51 @@
+{% extends 'sabbatical_blog/base.html' %}
+{% block extra_head %}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+{% endblock %}
+
+{% block title %}{{ object.title }}{% endblock %}
+
+{% load comments %}
+
+{% block content %}
+<div id="scroll-target" class="row border rounded mb-3 pt-3">
+    <h2>{{ object.title | safe }}</h2>
+    <h3 class="pb-3">By {{ object.author.first_name }} in {% for cat in object.category.all %}{{ cat.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</h3>
+
+    <p>{{ post.published_date}}</p>
+
+    <img class="img-fluid pb-3" src="{{ post.featured_img_URL }}">
+
+    {{ object.content | safe }}
+
+</div>
+    <div class="row">
+
+    <h3 class="pb-3">Comments and replies</h3>
+    {% render_comment_list for post  %}
+
+    <h3 class="pt-3 pb-3">Post location</h3>
+    {% if object.map_latitude and object.map_longitude %}
+
+        <div id="map" style="height: 450px;"></div>
+
+
+        <script>
+            var map = L.map("map").setView([{{object.map_latitude}}, {{object.map_longitude}}], 6);
+            L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            maxZoom: 19,
+            attribution: "&copy; OpenStreetMap</a>"
+            }).addTo(map);
+            L.marker([{{object.map_latitude}}, {{object.map_longitude}}]).addTo(map)
+            .bindPopup('{{object.map_popup_label}}')
+            .openPopup();
+        </script>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'sabbatical_blog/base.html' %}
+
+{% block content %}
+
+    <div class="row mb-3 pb-3">
+    <h2 class="pb-3">Categories</h2>
+    <ul style="list-style-type: none;">
+        {% for category in object_list %}
+            <li><a href="{{ category.name }}">{{ category.name }}</a></li>
+        {% endfor %}
+    </ul>
+
+    </div>
+{% endblock %}
