@@ -4,10 +4,16 @@
 
     <div class="row mb-3 pb-3">
     <h2 class="pb-3">Categories</h2>
-    <ul style="list-style-type: none;">
-        {% for category in object_list %}
-            <li><a href="{{ category.name }}">{{ category.name }}</a></li>
-        {% endfor %}
+    {% for category in object_list %}
+    <div class="card mb-2">
+        <div class="card-body">
+            <h5 class="card-title">{{ category.name }}</h5>
+            <p class="card-text"><a href="{{ category.name }}">See all {{ category.name }} posts</a></p>
+        </div>
+    </div>
+    {% endfor %}
+
+
     </ul>
 
     </div>
