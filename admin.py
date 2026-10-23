@@ -2,16 +2,25 @@ from django.contrib import admin
 
 from .models import Post, Category
 
+from django_comments.models import Comment
 
-@admin.register(Category)
+class SabbaticalBlogAdminSite(admin.AdminSite):
+    site_header = "Sabbatical Blog Admin"
+
+sabbaticalBlogAdminSite = SabbaticalBlogAdminSite(name='Sabbatical Blog Admin')
+
+@admin.register(Category, site=sabbaticalBlogAdminSite)
 class CategoryAdmin(admin.ModelAdmin):
     # What columns show up in the list view
     list_display = ('name', 'slug')
     # Automatically fills the slug as you type the name
     prepopulated_fields = {'slug': ('name',)}
 
+@admin.register(Comment, site=sabbaticalBlogAdminSite)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ("comment",)
 
-@admin.register(Post)
+@admin.register(Post, site=sabbaticalBlogAdminSite)
 class PostAdmin(admin.ModelAdmin):
     # Columns to display in the admin list
     list_display = ('title', 'author', 'published_date')
