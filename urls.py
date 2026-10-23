@@ -21,7 +21,7 @@ from sabbatical_blog.views import PostDetailView, HomeView, MapView, AboutView, 
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home-list'),
-    path("login/", login_view, name="login"),
+    path("accounts/login/", login_view, name="login"),
     path('admin/', admin.site.urls),
     path('about/', AboutView.as_view()),
     path('map/', MapView.as_view()),
