@@ -4,7 +4,7 @@
 {% block title %}Fentarr Family Blog{% endblock %}
 
 {% block content %}
-    <h3 class="pb-3">Showing {{ object_list | length  }} posts in category: {{ category }}</h3>
+    <h3 class="pb-3">🗃 {{ category }}: {{ object_list | length  }} posts</h3>
 
     {% for post in object_list %}
         <div class="row border rounded mb-3 pt-3 single-post-in-list">

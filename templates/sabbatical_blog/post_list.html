@@ -11,7 +11,9 @@
 
             <h2 class="post-title" data-target-url="/posts/{{ post.slug }}">{{ post.title | safe }}</h2>
 
-            <h3 class="pb-3">By {{ post.author.first_name }} in {% for cat in post.category.all %}<span class="post-category" data-target-url="categories/{{ cat.name }}">{{ cat.name }}</span>{% if not forloop.last %}, {% endif %}{% endfor %}</h3>
+            <h3 class="pb-3">By {{ post.author.first_name }}</h3>
+
+            <h4> {% for cat in post.category.all %}<span class="post-category" data-target-url="categories/{{ cat.name }}">🗃 {{ cat.name }}</span>{% if not forloop.last %}, {% endif %}{% endfor %}</h4>
 
             <p>{{ post.published_date}}</p>
             <img class="img-fluid pb-3" src="{{ post.featured_img_URL }}">
