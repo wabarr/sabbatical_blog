@@ -14,7 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from sabbatical_blog.admin import sabbaticalBlogAdminSite
+from sabbatical_blog.admin import sabbaticalBlogAdminSite, admin
 from django.urls import path, include
 from sabbatical_blog.views import PostDetailView, HomeView, MapView, AboutView, CategoryView, CategoryListView, login_view
 
@@ -30,5 +30,6 @@ urlpatterns = [
     path("ckeditor5/", include('django_ckeditor_5.urls')),
     path("posts/<slug:slug>/", PostDetailView.as_view(), name="post-detail"),
     path('comments/', include('django_comments.urls')),
+    path('su/',admin.site.urls),
 
 ]
