@@ -18,7 +18,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(LegacyWPMedia, site=sabbaticalBlogAdminSite)
 class LegacyWPMediaAdmin(admin.ModelAdmin):
-    list_display = ('legacyWPID','media_url')
+    list_display = ('legacyWPID','media_url', 'google_storage_url')
 
 @admin.register(Comment, site=sabbaticalBlogAdminSite)
 class CommentAdmin(admin.ModelAdmin):
