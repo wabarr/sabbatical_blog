@@ -18,6 +18,7 @@ class Category(models.Model):
 class LegacyWPMedia(models.Model):
     legacyWPID = models.IntegerField(null=True, blank=True)
     media_url = models.URLField(null=True, blank=True)
+    google_storage_url = models.URLField(null=True, blank=True)
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
