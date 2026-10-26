@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Post, Category
+from .models import Post, Category, LegacyWPMedia
 
 from django_comments.models import Comment
 
@@ -15,6 +15,10 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug')
     # Automatically fills the slug as you type the name
     prepopulated_fields = {'slug': ('name',)}
+
+@admin.register(LegacyWPMedia, site=sabbaticalBlogAdminSite)
+class LegacyWPMediaAdmin(admin.ModelAdmin):
+    list_display = ('legacyWPID','media_url')
 
 @admin.register(Comment, site=sabbaticalBlogAdminSite)
 class CommentAdmin(admin.ModelAdmin):
