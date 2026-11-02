@@ -58,3 +58,6 @@ class AllPicsView(ListView):
     model = LegacyWPMedia
     paginate_by = 12
     template_name = 'sabbatical_blog/mediagallery.html'
+
+    def get_queryset(self):
+        return LegacyWPMedia.objects.all().order_by('legacyWPID')
