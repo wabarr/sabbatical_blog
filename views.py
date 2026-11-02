@@ -1,7 +1,8 @@
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic import TemplateView
-from sabbatical_blog.models import Post, Category
+
+from sabbatical_blog.models import Post, Category, LegacyWPMedia
 from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import redirect, render
@@ -53,3 +54,7 @@ def login_view(request):
 
   return render(request, "sabbatical_blog/login.html", {"form": form})
 
+class AllPicsView(ListView):
+    model = LegacyWPMedia
+    paginate_by = 12
+    template_name = 'sabbatical_blog/mediagallery.html'

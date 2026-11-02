@@ -16,7 +16,7 @@ Including another URLconf
 """
 from sabbatical_blog.admin import sabbaticalBlogAdminSite, admin
 from django.urls import path, include
-from sabbatical_blog.views import PostDetailView, HomeView, MapView, AboutView, CategoryView, CategoryListView, login_view
+from sabbatical_blog.views import PostDetailView, HomeView, MapView, AboutView, CategoryView, CategoryListView, login_view, AllPicsView
 
 
 urlpatterns = [
@@ -30,6 +30,7 @@ urlpatterns = [
     path("ckeditor5/", include('django_ckeditor_5.urls')),
     path("posts/<slug:slug>/", PostDetailView.as_view(), name="post-detail"),
     path('comments/', include('django_comments.urls')),
+    path('pictures/', AllPicsView.as_view()),
     path('su/',admin.site.urls),
 
 ]
