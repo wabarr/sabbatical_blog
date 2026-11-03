@@ -40,8 +40,9 @@
         <script>
             var map = L.map("map").setView([{{object.map_latitude}}, {{object.map_longitude}}], 6);
             L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-            maxZoom: 19,
-            attribution: "&copy; OpenStreetMap</a>"
+                maxZoom: 19,
+                attribution: "<a href='https://www.openstreetmap.org/copyright'>&copy; OpenStreetMap</a>",
+                referrerPolicy: 'strict-origin-when-cross-origin'
             }).addTo(map);
             L.marker([{{object.map_latitude}}, {{object.map_longitude}}]).addTo(map)
             .bindPopup('{{object.map_popup_label}}')
