@@ -24,8 +24,27 @@
     <img class="img-fluid pb-3" src="{{ post.featured_img_URL }}">
 
     {{ object.content | safe }}
-
 </div>
+    <div class="row pb-3">
+    <div class="col">
+        {% if prevpost %}
+                <a href="/posts/{{ prevpost.slug }}"> ⬅️ Previous post</a>
+        {% else %}
+            <p>There are no older posts</p>
+        {% endif %}
+    </div>
+
+    <div class="col d-flex justify-content-end">
+        {% if nextpost %}
+            <a href="/posts/{{ nextpost.slug }}">Next post ➡️ </a>
+        {% else %}
+            <p>There are no more recent posts</p>
+        {% endif %}
+    </div>
+
+
+    </div>
+
     <div class="row">
 
     <h3 class="pb-3">Comments and replies</h3>
