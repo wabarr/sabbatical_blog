@@ -28,7 +28,8 @@ var markers = new L.featureGroup();
 var map = L.map("map").setView([15,-40], 2)
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
-    attribution: "&copy; OpenStreetMap</a>"
+    attribution: "<a href='https://www.openstreetmap.org/copyright'>&copy; OpenStreetMap</a>",
+    referrerPolicy: 'strict-origin-when-cross-origin'
 }).addTo(map);
 
 {% for post in posts %}
