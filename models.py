@@ -24,8 +24,8 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
     legacy_WP_id = models.IntegerField(null=True, blank=True)
-
-    featured_img_URL = models.URLField(null=True, blank=True)
+    featured_img = models.ImageField(null=True, blank=True)
+    #featured_img_URL = models.URLField(null=True, blank=True)
 
     # Author field linked to Django's built-in User model
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts', limit_choices_to={'is_staff': True})
