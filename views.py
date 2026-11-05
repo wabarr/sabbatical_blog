@@ -7,6 +7,9 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_not_required
+from bs4 import BeautifulSoup
+
+from django.core.files.storage import default_storage
 
 class CategoryListView(ListView):
     model = Category
@@ -35,7 +38,24 @@ class PostDetailView(DetailView):
             context['prevpost'] = self.object.get_previous_by_published_date()
         except:
             pass
+
+        #dynamically modify the object in the context and
+        #insert freshed signed URLS from google cloud storage
+
+        obj = self.object
+        soup = BeautifulSoup(obj.content, "html.parser")
+        for img in soup.find_all("img"):
+            replacement_img = soup.new_tag("img")
+            replacement_img["class"] = "img-fluid pb-3"
+            url = default_storage.url(img["src"].split("/")[-1])
+            replacement_img["src"] = url
+            img.replace_with(replacement_img)
+        for video in soup.find_all("video"):
+            url = default_storage.url(video["src"].split("/")[-1])
+            video["src"] = url
+        obj.content = soup.prettify()
         return context
+
 
 class AboutView(TemplateView):
     template_name = 'sabbatical_blog/about.html'
