@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django_ckeditor_5.fields import CKEditor5Field
+from django.core.files.storage import storages
 
 
 class Category(models.Model):
@@ -19,13 +20,13 @@ class LegacyWPMedia(models.Model):
     legacyWPID = models.IntegerField(null=True, blank=True)
     media_url = models.URLField(null=True, blank=True)
     #google_storage_url = models.URLField(null=True, blank=True)
-    google_storage_img = models.ImageField(null=True, blank=True)
+    google_storage_img = models.ImageField(null=True, blank=True, storage=storages["sabbatical_blog_storage"])
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
     legacy_WP_id = models.IntegerField(null=True, blank=True)
-    featured_img = models.ImageField(null=True, blank=True)
+    featured_img = models.ImageField(null=True, blank=True, storage=storages["sabbatical_blog_storage"])
     #featured_img_URL = models.URLField(null=True, blank=True)
 
     # Author field linked to Django's built-in User model

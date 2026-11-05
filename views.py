@@ -9,7 +9,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_not_required
 from bs4 import BeautifulSoup
 
-from django.core.files.storage import default_storage
+from django.core.files.storage import storages
 
 class CategoryListView(ListView):
     model = Category
@@ -47,11 +47,11 @@ class PostDetailView(DetailView):
         for img in soup.find_all("img"):
             replacement_img = soup.new_tag("img")
             replacement_img["class"] = "img-fluid pb-3"
-            url = default_storage.url(img["src"].split("/")[-1])
+            url = storages["sabbatical_blog_storage"].url(img["src"].split("/")[-1])
             replacement_img["src"] = url
             img.replace_with(replacement_img)
         for video in soup.find_all("video"):
-            url = default_storage.url(video["src"].split("/")[-1])
+            url = storages["sabbatical_blog_storage"].url(video["src"].split("/")[-1])
             video["src"] = url
         obj.content = soup.prettify()
         return context
