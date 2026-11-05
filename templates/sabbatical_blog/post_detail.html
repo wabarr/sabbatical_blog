@@ -21,7 +21,7 @@
 
     <p>{{ post.published_date}}</p>
 
-    <img class="img-fluid pb-3" src="{{ post.featured_img_URL }}">
+    <img class="img-fluid pb-3" src="{{ post.featured_img.url }}">
 
     {{ object.content | safe }}
 </div>
